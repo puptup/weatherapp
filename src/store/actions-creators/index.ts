@@ -3,11 +3,10 @@ import {
   FETCH_GEOPOSITION,
   INITIAL_APP,
   LOAD_EVENTS_FROM_CALENDAR,
+  MATCH_CITY,
   SET_DAY,
 } from "@store/actions";
 import { MatchedCitiesType } from "@types";
-
-import { MATCH_CITY } from "../actions/index";
 
 export const fetchGeoposition = () => ({ type: FETCH_GEOPOSITION });
 

@@ -1,33 +1,33 @@
 /* eslint-disable no-nested-ternary */
 import { HourlyWeatherItem } from "@components/hourly-weather-item";
+import { RenderDesiredScreen } from "@components/render-desired-screen";
 import { useAppSelector } from "@hooks";
-import { currentDaySelector, hourlyWeatherSelector } from "@store/selectors";
+import {
+  currentDaySelector,
+  hourlyWeatherCurrentSelector,
+  hourlyWeatherStateSelector,
+} from "@store/selectors";
 import { getWeekdayOrToday } from "@utils/date";
 import React from "react";
 
-import { HourlyWeatherWrapper, ItemsWrapper, Line, NotFound, TitleWrapper } from "./styled";
+import { HourlyWeatherWrapper, ItemsWrapper, Line, TitleWrapper } from "./styled";
 
 export const HourlyWeather = () => {
-  const { isLoading, hasError, weatherOnCurrentDay } = useAppSelector(hourlyWeatherSelector);
+  const state = useAppSelector(hourlyWeatherStateSelector);
+  const weather = useAppSelector(hourlyWeatherCurrentSelector);
   const currentDay = useAppSelector(currentDaySelector);
   const WeekDay = getWeekdayOrToday(currentDay);
 
-  if (hasError) {
-    return <div>Something went wrong...</div>;
-  }
-
   return (
     <HourlyWeatherWrapper>
-      <TitleWrapper>{WeekDay}&apos;s hourly forecast</TitleWrapper>
+      <TitleWrapper>{WeekDay}&apos; hourly forecast</TitleWrapper>
       <Line />
       <ItemsWrapper>
-        {isLoading ? (
-          <div>Spinner</div>
-        ) : weatherOnCurrentDay.length > 0 ? (
-          weatherOnCurrentDay.map((item) => <HourlyWeatherItem item={item} key={item.date} />)
-        ) : (
-          <NotFound>Information not found</NotFound>
-        )}
+        <RenderDesiredScreen state={state}>
+          {weather.map((item) => (
+            <HourlyWeatherItem item={item} key={item.date} />
+          ))}
+        </RenderDesiredScreen>
       </ItemsWrapper>
       <Line />
     </HourlyWeatherWrapper>

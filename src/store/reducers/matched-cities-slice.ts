@@ -1,15 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { MatchedCitiesType } from "@types";
+import { MatchedCitiesType, State } from "@types";
 
 type MatchedCitiesState = {
-  isLoading: boolean;
-  hasError: boolean;
+  matchedCitiesState: State;
   cities: MatchedCitiesType[];
 };
 
 const initialState: MatchedCitiesState = {
-  isLoading: false,
-  hasError: false,
+  matchedCitiesState: State.normal,
   cities: [],
 };
 
@@ -17,22 +15,14 @@ const matchedCitiesSlice = createSlice({
   name: "matchedCities",
   initialState,
   reducers: {
-    cityesRequested: (state) => {
-      state.isLoading = true;
-      state.hasError = false;
+    matchedCitiesChange: (state, { payload }: PayloadAction<State>) => {
+      state.matchedCitiesState = payload;
     },
-    cityesRecieved: (state, { payload }: PayloadAction<MatchedCitiesType[]>) => {
+    setCityes: (state, { payload }: PayloadAction<MatchedCitiesType[]>) => {
       state.cities = payload;
-      state.isLoading = false;
-      state.hasError = false;
-    },
-    cityesFailed: (state) => {
-      state.cities = [];
-      state.isLoading = false;
-      state.hasError = true;
     },
   },
 });
 
 export const { reducer: matchedCitiesReducer } = matchedCitiesSlice;
-export const { cityesFailed, cityesRecieved, cityesRequested } = matchedCitiesSlice.actions;
+export const { matchedCitiesChange, setCityes } = matchedCitiesSlice.actions;

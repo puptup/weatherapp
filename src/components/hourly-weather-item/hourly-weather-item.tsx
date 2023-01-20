@@ -11,7 +11,7 @@ type HourlyWeatherItemProps = {
 
 export const HourlyWeatherItem = ({ item }: HourlyWeatherItemProps) => {
   const { date, temperature, icon } = item;
-  const [image, setImage] = useState(undefined);
+  const [image, setImage] = useState<string>();
 
   useEffect(() => {
     loadIcon(icon, true).then((path) => {

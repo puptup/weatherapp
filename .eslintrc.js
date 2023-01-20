@@ -46,6 +46,7 @@ module.exports = {
     "react/button-has-type": "off",
     "react-hooks/exhaustive-deps": "off",
     "react/jsx-fragments": "off",
+    "react/jsx-no-useless-fragment": "off",
     "prettier/prettier": [
       "error",
       {

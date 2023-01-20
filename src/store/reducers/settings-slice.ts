@@ -10,8 +10,8 @@ const initialState: ThemeStateType = {
   theme: "clear-sky",
 };
 
-const themeSlice = createSlice({
-  name: "theme",
+const settingsSlice = createSlice({
+  name: "settings",
   initialState,
   reducers: {
     setTheme: (state, { payload }: PayloadAction<Theme>) => {
@@ -20,5 +20,5 @@ const themeSlice = createSlice({
   },
 });
 
-export const { reducer: themeReducer } = themeSlice;
-export const { setTheme } = themeSlice.actions;
+export const { reducer: settingsReducer } = settingsSlice;
+export const { setTheme } = settingsSlice.actions;

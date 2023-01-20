@@ -3,11 +3,10 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import { calendarReducer } from "./calendar-slice";
-import { dailyWeatherReducer } from "./daily-weather-slice";
 import { geopositionReducer } from "./geoposition-slice";
-import { hourlyWeatherReducer } from "./hourly-weather-slice";
 import { matchedCitiesReducer } from "./matched-cities-slice";
-import { themeReducer } from "./theme-slice";
+import { settingsReducer } from "./settings-slice";
+import { weatherReducer } from "./weather-slice";
 
 const calendarConfig = {
   key: "dailyWeather",
@@ -16,10 +15,9 @@ const calendarConfig = {
 };
 
 export const rootReducer = combineReducers({
-  dailyWeather: dailyWeatherReducer,
-  hourlyWeather: hourlyWeatherReducer,
+  weather: weatherReducer,
   geoposition: geopositionReducer,
   calendar: persistReducer(calendarConfig, calendarReducer),
-  theme: themeReducer,
+  settings: settingsReducer,
   matchedCities: matchedCitiesReducer,
 });

@@ -29,8 +29,3 @@ export const ItemsWrapper = styled.div`
   overflow: scroll;
   gap: 34px;
 `;
-
-export const NotFound = styled.span`
-  text-align: center;
-  width: 100%;
-`;

@@ -1,3 +1,10 @@
+export enum State {
+  loading = "loading",
+  error = "error",
+  notFound = "not-found",
+  normal = "normal",
+}
+
 type WeatherType = {
   temperature: number;
   icon: string;

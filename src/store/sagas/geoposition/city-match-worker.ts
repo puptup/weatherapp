@@ -1,10 +1,7 @@
 import { findPlacesByPrefix } from "@services/api/meteo-source";
 import { matchCity } from "@store/actions-creators";
-import {
-  cityesFailed,
-  cityesRecieved,
-  cityesRequested,
-} from "@store/reducers/matched-cities-slice";
+import { matchedCitiesChange, setCityes } from "@store/reducers/matched-cities-slice";
+import { State } from "@types";
 import { SagaIterator } from "redux-saga";
 import { call, delay, put } from "redux-saga/effects";
 
@@ -15,11 +12,17 @@ export type ResponceCityes = {
 
 export function* fetchMatchedCityes({ payload }: ReturnType<typeof matchCity>): SagaIterator {
   yield delay(300);
-  yield put(cityesRequested());
+  yield put(matchedCitiesChange(State.loading));
   try {
     const result: ResponceCityes = yield call(findPlacesByPrefix, payload);
-    yield put(cityesRecieved(result.slice(0, 5)));
+    if (result.length > 0) {
+      yield put(setCityes(result.slice(0, 5)));
+      yield put(matchedCitiesChange(State.normal));
+    } else {
+      yield put(setCityes([]));
+      yield put(matchedCitiesChange(State.notFound));
+    }
   } catch {
-    yield put(cityesFailed());
+    yield put(matchedCitiesChange(State.error));
   }
 }

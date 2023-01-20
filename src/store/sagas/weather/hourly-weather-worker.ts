@@ -1,14 +1,13 @@
 import { getHourlyWeather } from "@services";
 import { setDayAction } from "@store/actions-creators";
 import {
-  hourlyWeatherReceived,
-  hourlyWeatherRequested,
-  hourlyWeatherRequestFailed,
+  hourlyWeatherStateChange,
   setCurrentDay,
-  setWeatherOnCurrentDay,
-} from "@store/reducers/hourly-weather-slice";
+  setHourlyWeather,
+  setHourlyWeatherOnCurrentDay,
+} from "@store/reducers/weather-slice";
 import { citySelector } from "@store/selectors";
-import { HourlyWeather } from "@types";
+import { HourlyWeather, State } from "@types";
 import { convertToHourlyWeather } from "@utils/conversion-response-to-type";
 import { SagaIterator } from "redux-saga";
 import { call, fork, put, select } from "redux-saga/effects";
@@ -22,7 +21,7 @@ export function* setCurrentHourlyWeather(): SagaIterator {
   const weatherOnCurrentDay = weather.filter(
     (item) => new Date(item.date).getDay() === new Date(day).getDay()
   );
-  yield put(setWeatherOnCurrentDay(weatherOnCurrentDay));
+  yield put(setHourlyWeatherOnCurrentDay(weatherOnCurrentDay));
 }
 
 export function* setDaySaga({ payload }: ReturnType<typeof setDayAction>): SagaIterator {
@@ -33,13 +32,19 @@ export function* setDaySaga({ payload }: ReturnType<typeof setDayAction>): SagaI
 
 export function* hourlyWeatherWorker(): SagaIterator {
   const city = yield select(citySelector);
-  yield put(hourlyWeatherRequested());
+  yield put(hourlyWeatherStateChange(State.loading));
   try {
     const response = yield call(getHourlyWeather, city);
     const weatherList = convertToHourlyWeather(response);
-    yield put(hourlyWeatherReceived(weatherList));
+    if (weatherList.length > 0) {
+      yield put(hourlyWeatherStateChange(State.normal));
+    } else {
+      yield put(hourlyWeatherStateChange(State.notFound));
+    }
+
+    yield put(setHourlyWeather(weatherList));
     yield fork(setCurrentHourlyWeather);
   } catch (e) {
-    yield put(hourlyWeatherRequestFailed());
+    yield put(hourlyWeatherStateChange(State.error));
   }
 }

@@ -1,12 +1,8 @@
 import { getDailyWeather } from "@services/api/meteo-source";
-import {
-  dailyWeatherReceived,
-  dailyWeatherRequested,
-  dailyWeatherRequestFailed,
-} from "@store/reducers/daily-weather-slice";
-import { setTheme } from "@store/reducers/theme-slice";
+import { setTheme } from "@store/reducers/settings-slice";
+import { dailyWeatherStateChange, setDailyWeather } from "@store/reducers/weather-slice";
 import { citySelector } from "@store/selectors/index";
-import { DailyWeatherResponse } from "@types";
+import { DailyWeatherResponse, State } from "@types";
 import { convertToDailyWeather } from "@utils/conversion-response-to-type";
 import { getThemeByIcon } from "@utils/theme-by-icon";
 import { SagaIterator } from "redux-saga";
@@ -14,16 +10,22 @@ import { call, put, select } from "redux-saga/effects";
 
 export function* dailyWeatherWorker(): SagaIterator {
   const city = yield select(citySelector);
-  yield put(dailyWeatherRequested());
+  yield put(dailyWeatherStateChange(State.loading));
   try {
     const response: DailyWeatherResponse = yield call(getDailyWeather, city);
     const weatherList = convertToDailyWeather(response);
-    const todayWeather = weatherList.filter(
-      (item) => new Date(item.date).getDay() === new Date().getDay()
-    )[0];
-    yield put(setTheme(getThemeByIcon(todayWeather.icon)));
-    yield put(dailyWeatherReceived(weatherList));
+    if (weatherList.length > 0) {
+      yield put(dailyWeatherStateChange(State.normal));
+      yield put(setDailyWeather(weatherList));
+      const todayWeather = weatherList.filter(
+        (item) => new Date(item.date).getDay() === new Date().getDay()
+      )[0];
+      yield put(setTheme(getThemeByIcon(todayWeather.icon)));
+    } else {
+      yield put(dailyWeatherStateChange(State.notFound));
+      yield put(setDailyWeather(weatherList));
+    }
   } catch (e) {
-    yield put(dailyWeatherRequestFailed());
+    yield put(dailyWeatherStateChange(State.error));
   }
 }

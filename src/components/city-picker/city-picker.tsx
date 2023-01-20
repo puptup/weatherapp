@@ -1,7 +1,8 @@
 /* eslint-disable no-nested-ternary */
+import { RenderDesiredScreen } from "@components/render-desired-screen";
 import { useAppSelector } from "@hooks";
 import { changeCity, matchCity } from "@store/actions-creators";
-import { citySelector, matchedCitiesSelector } from "@store/selectors";
+import { citySelector, matchedCitiesSelector, matchedCitiesStateSelector } from "@store/selectors";
 import { MatchedCitiesType } from "@types";
 import React, { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -15,8 +16,9 @@ type CityPickerProps = {
 export const CityPicker = ({ handleClose }: CityPickerProps) => {
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
-  const { isLoading, hasError, cities } = useAppSelector(matchedCitiesSelector);
+  const state = useAppSelector(matchedCitiesStateSelector);
   const currentCity = useAppSelector(citySelector);
+  const cities = useAppSelector(matchedCitiesSelector);
 
   useEffect(() => {
     setInput(currentCity);
@@ -42,17 +44,13 @@ export const CityPicker = ({ handleClose }: CityPickerProps) => {
       <InputBlock onClick={handleClick}>
         <Title>City picker</Title>
         <Input type="text" onChange={handleChange} value={input} />
-        {isLoading && <div>Spinner</div>}
-        {hasError && <div>Something went wrong</div>}
-        {cities.length ? (
-          cities.map((item) => (
+        <RenderDesiredScreen state={state}>
+          {cities.map((item) => (
             <Item key={item.name + item.country} onClick={handleChangeCurrentCity(item)}>
               {item.name}, {item.country}
             </Item>
-          ))
-        ) : (
-          <Title>Write city preffix</Title>
-        )}
+          ))}
+        </RenderDesiredScreen>
       </InputBlock>
     </PopUp>
   );
