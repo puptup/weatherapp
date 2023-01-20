@@ -1,4 +1,7 @@
-export const getMatchedCities = () =>
-  fetch("http://autocomplete.travelpayouts.com/places2?term=Bori&locale=en&types[]=city").then(
-    (response) => response.json()
-  );
+const apiBase = "http://autocomplete.travelpayouts.com/";
+
+export const getMatchedCities = async () => {
+  const response = await fetch(`${apiBase}places2?term=Bori&locale=en&types[]=city`);
+  const result = await response.json();
+  return result;
+};

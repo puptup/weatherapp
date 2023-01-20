@@ -27,16 +27,17 @@ export const getEndOfDay = (day: Date): Date => {
   return end;
 };
 
-export const fetchDayEvents = async (token: string, day: Date) => {
+export const fetchDayEvents = async (token: string, day: Date): Promise<CalendarAPIResponse> => {
   const timeMin = getStartDay(day).toISOString();
   const timeMax = getEndOfDay(day).toISOString();
-
-  return fetch(
+  const response = await fetch(
     `${apiBase}?key=${apiKey}&orderBy=startTime&singleEvents=true&timeMin=${timeMin}&timeMax=${timeMax}`,
     {
       headers: {
         Authorization: token,
       },
     }
-  ).then((res) => res.json() as Promise<CalendarAPIResponse>);
+  );
+  const result = await response.json();
+  return result;
 };

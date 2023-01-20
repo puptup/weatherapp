@@ -14,7 +14,11 @@ export function* geopositionWorker(): SagaIterator {
   try {
     const response = yield call(getGeolocation);
     const { city, country_name } = response;
-    yield put(geopositionReceived({ city, country: country_name } as GeopositionType));
+    const geo: GeopositionType = {
+      city,
+      country: country_name,
+    };
+    yield put(geopositionReceived(geo));
   } catch (e) {
     yield put(geopositionRequestFailed());
   }
