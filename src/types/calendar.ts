@@ -5,7 +5,7 @@ export type CalendarEvent = {
   id: string;
 };
 
-export type CalendarAPIResponce = {
+export type CalendarAPIResponse = {
   items: {
     id: string;
     end: {

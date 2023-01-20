@@ -2,7 +2,7 @@ import { apiCalendar, fetchDayEvents } from "@services/api/calendar";
 import { RootState } from "@store";
 import { LOAD_EVENTS_FROM_CALENDAR } from "@store/actions";
 import { setEvents } from "@store/reducers/calendar-slice";
-import { CalendarAPIResponce, CalendarEvent } from "@types";
+import { CalendarAPIResponse, CalendarEvent } from "@types";
 import { SagaIterator } from "redux-saga";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 
@@ -15,7 +15,7 @@ export function* CalendarLoadEvents(): SagaIterator {
   const currentDay: Date = yield select(currentDaySelector);
   if (token) {
     try {
-      const responce: CalendarAPIResponce = yield call(fetchDayEvents, token, currentDay);
+      const responce: CalendarAPIResponse = yield call(fetchDayEvents, token, currentDay);
 
       const events: CalendarEvent[] = responce.items.map((item) => ({
         start: item.start.dateTime,

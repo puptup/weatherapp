@@ -1,6 +1,6 @@
-import { DailyWeather, DailyWeatherResponce, HourlyWeather, HourlyWeatherResponce } from "@types";
+import { DailyWeather, DailyWeatherResponse, HourlyWeather, HourlyWeatherResponse } from "@types";
 
-export const convertToDailyWeather = (responce: DailyWeatherResponce): DailyWeather[] => {
+export const convertToDailyWeather = (responce: DailyWeatherResponse): DailyWeather[] => {
   return responce.daily.data.map((item) => ({
     temperature: item.all_day.temperature,
     icon: String(item.icon),
@@ -11,7 +11,7 @@ export const convertToDailyWeather = (responce: DailyWeatherResponce): DailyWeat
   }));
 };
 
-export const convertToHourlyWeather = (data: HourlyWeatherResponce): HourlyWeather[] => {
+export const convertToHourlyWeather = (data: HourlyWeatherResponse): HourlyWeather[] => {
   return data.list.map((item) => ({
     temperature: item.main.temp,
     maxTemperature: item.main.temp_max,

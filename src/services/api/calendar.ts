@@ -1,4 +1,4 @@
-import { CalendarAPIResponce } from "@types";
+import { CalendarAPIResponse } from "@types";
 import ApiCalendar from "react-google-calendar-api";
 
 const clientId = process.env.GOOGLE_CLIENT_ID!;
@@ -38,5 +38,5 @@ export const fetchDayEvents = async (token: string, day: Date) => {
         Authorization: token,
       },
     }
-  ).then((res) => res.json() as Promise<CalendarAPIResponce>);
+  ).then((res) => res.json() as Promise<CalendarAPIResponse>);
 };

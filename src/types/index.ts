@@ -1,8 +1,8 @@
-export { CalendarAPIResponce, CalendarEvent } from "./calendar";
+export { CalendarAPIResponse, CalendarEvent } from "./calendar";
 export { GeopositionType, MatchedCitiesType } from "./geoposition";
 export {
   DailyWeather,
-  DailyWeatherResponce,
+  DailyWeatherResponse,
   HourlyWeather,
-  HourlyWeatherResponce,
+  HourlyWeatherResponse,
 } from "./weather";

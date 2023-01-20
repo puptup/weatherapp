@@ -9,7 +9,7 @@ type WeatherType = {
 export type DailyWeather = WeatherType & { date: string };
 export type HourlyWeather = WeatherType & { date: string };
 
-export type DailyWeatherResponce = {
+export type DailyWeatherResponse = {
   daily: {
     data: {
       day: string;
@@ -24,7 +24,7 @@ export type DailyWeatherResponce = {
   };
 };
 
-export type HourlyWeatherResponce = {
+export type HourlyWeatherResponse = {
   list: {
     dt_txt: string;
     main: {

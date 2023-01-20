@@ -6,7 +6,7 @@ import {
 } from "@store/reducers/daily-weather-slice";
 import { setTheme } from "@store/reducers/theme-slice";
 import { citySelector } from "@store/selectors/index";
-import { DailyWeatherResponce } from "@types";
+import { DailyWeatherResponse } from "@types";
 import { convertToDailyWeather } from "@utils/conversion-response-to-type";
 import { getThemeByIcon } from "@utils/theme-by-icon";
 import { SagaIterator } from "redux-saga";
@@ -16,7 +16,7 @@ export function* dailyWeatherWorker(): SagaIterator {
   const city = yield select(citySelector);
   yield put(dailyWeatherRequested());
   try {
-    const response: DailyWeatherResponce = yield call(getDailyWeather, city);
+    const response: DailyWeatherResponse = yield call(getDailyWeather, city);
     const weatherList = convertToDailyWeather(response);
     const todayWeather = weatherList.filter(
       (item) => new Date(item.date).getDay() === new Date().getDay()
