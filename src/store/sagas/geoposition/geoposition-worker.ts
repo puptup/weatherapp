@@ -1,16 +1,12 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { getGeolocation } from "@services";
-import {
-  geopositionReceived,
-  geopositionRequested,
-  geopositionRequestFailed,
-} from "@store/reducers/geoposition-slice";
-import { GeopositionType } from "@types";
+import { geopositionStateChange, setGeoposition } from "@store/reducers/geoposition-slice";
+import { GeopositionType, State } from "@types";
 import { SagaIterator } from "redux-saga";
 import { call, put } from "redux-saga/effects";
 
 export function* geopositionWorker(): SagaIterator {
-  yield put(geopositionRequested());
+  yield put(geopositionStateChange(State.loading));
   try {
     const response = yield call(getGeolocation);
     const { city, country_name } = response;
@@ -18,8 +14,9 @@ export function* geopositionWorker(): SagaIterator {
       city,
       country: country_name,
     };
-    yield put(geopositionReceived(geo));
+    yield put(setGeoposition(geo));
+    yield put(geopositionStateChange(State.normal));
   } catch (e) {
-    yield put(geopositionRequestFailed());
+    yield put(geopositionStateChange(State.error));
   }
 }

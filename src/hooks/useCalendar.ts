@@ -1,6 +1,6 @@
 import { apiCalendar } from "@services/api/calendar";
 import { loadEvents } from "@store/actions-creators/index";
-import { setLoggedIn, setLoggedOut } from "@store/reducers/calendar-slice";
+import { setLoading, setLoggedIn, setLoggedOut } from "@store/reducers/calendar-slice";
 import { useDispatch } from "react-redux";
 
 export const useCalendar = () => {
@@ -8,6 +8,7 @@ export const useCalendar = () => {
 
   const handleSignIn = () => {
     apiCalendar.handleAuthClick();
+    dispatch(setLoading());
     apiCalendar.tokenClient.callback = ({
       access_token,
       token_type,

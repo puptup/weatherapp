@@ -5,7 +5,7 @@ import storage from "redux-persist/lib/storage";
 import { calendarReducer } from "./calendar-slice";
 import { geopositionReducer } from "./geoposition-slice";
 import { matchedCitiesReducer } from "./matched-cities-slice";
-import { settingsReducer } from "./settings-slice";
+import { settingsReducer } from "./theme-slice";
 import { weatherReducer } from "./weather-slice";
 
 const calendarConfig = {

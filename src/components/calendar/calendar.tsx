@@ -4,6 +4,7 @@ import { useCalendar } from "@hooks/useCalendar";
 import { calendarSelector, currentDaySelector } from "@store/selectors";
 import { getWeekdayOrToday } from "@utils/date";
 import React from "react";
+import { shallowEqual } from "react-redux";
 
 import Logo from "../../assets/g.png";
 import {
@@ -24,7 +25,7 @@ import {
 
 export const Calendar = () => {
   const { handleSignIn, handleSignOut } = useCalendar();
-  const { isLogged, events } = useAppSelector(calendarSelector);
+  const { isLogged, events } = useAppSelector(calendarSelector, shallowEqual);
   const currentDay = useAppSelector(currentDaySelector);
   const WeekDay = getWeekdayOrToday(currentDay);
 

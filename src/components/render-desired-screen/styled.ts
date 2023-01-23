@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NotFound = styled.span`
+export const Text = styled.span`
   text-align: center;
   width: 100%;
 `;

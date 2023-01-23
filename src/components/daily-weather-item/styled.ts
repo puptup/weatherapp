@@ -1,3 +1,4 @@
+import { device } from "@constants/devices";
 import styled from "styled-components";
 
 type WeatherItemProps = {
@@ -28,6 +29,14 @@ export const WeatherItem = styled.div<WeatherItemProps>`
       background-color: ${theme.palette.item.active};
     }
   `}
+
+  @media ${device.laptop} {
+    width: 60px;
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    flex-shrink: 0;
+  }
 `;
 
 export const DateWrapper = styled.div``;

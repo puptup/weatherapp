@@ -1,3 +1,4 @@
+import { device } from "@constants/devices";
 import { loadBackground } from "@utils/loadImage";
 import styled from "styled-components";
 
@@ -6,7 +7,8 @@ type MainWrapperProps = {
 };
 
 export const MainWrapper = styled.div<MainWrapperProps>`
-  width: 1000px;
+  max-width: 1024px;
+  width: 100vw;
   background-image: url(${({ background }) => loadBackground(background)});
   background-size: 100%;
   padding: ${({ theme }) => theme.spacing.betweenBlocks};
@@ -17,6 +19,11 @@ export const MainWrapper = styled.div<MainWrapperProps>`
   align-items: stretch;
   gap: ${({ theme }) => theme.spacing.betweenBlocks};
   box-shadow: rgb(12 14 16 / 26%) 19px 20px 21px 0px;
+  margin-top: 60px;
+
+  @media ${device.laptop} {
+    flex-direction: column;
+  }
 `;
 
 export const Container = styled.div`

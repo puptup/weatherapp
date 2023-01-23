@@ -2,6 +2,7 @@ import { RootState } from "@store";
 
 export const citySelector = (state: RootState) => state.geoposition.city;
 export const geopositionSelector = (state: RootState) => state.geoposition;
+export const geopositionStateSelector = (state: RootState) => state.geoposition.geopositionState;
 
 export const dailyWeatherStateSelector = (state: RootState) => state.weather.dailyWeatherState;
 export const dailyWeatherSelector = (state: RootState) => state.weather.dailyWeather;

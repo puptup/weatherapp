@@ -6,7 +6,7 @@ export const HourlyWeatherWrapper = styled.div`
   background-color: ${({ theme }) => theme.palette.block.secondary};
   border-radius: ${({ theme }) => theme.spacing.borderRadiusBlock};
   color: ${({ theme }) => theme.palette.text.primary};
-  max-width: 730px;
+
   min-height: 134px;
   backdrop-filter: blur(100px);
 `;

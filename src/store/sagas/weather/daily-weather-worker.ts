@@ -1,5 +1,5 @@
 import { getDailyWeather } from "@services/api/meteo-source";
-import { setTheme } from "@store/reducers/settings-slice";
+import { setTheme } from "@store/reducers/theme-slice";
 import { dailyWeatherStateChange, setDailyWeather } from "@store/reducers/weather-slice";
 import { citySelector } from "@store/selectors/index";
 import { DailyWeatherResponse, State } from "@types";

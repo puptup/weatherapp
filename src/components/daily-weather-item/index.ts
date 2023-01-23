@@ -1,1 +1,1 @@
-export { DailyWeatherItem as WeatherItemContainer } from "./daily-weather-item";
+export { DailyWeatherItem } from "./daily-weather-item";

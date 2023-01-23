@@ -1,6 +1,7 @@
 import { CityPicker } from "@components/city-picker";
+import { RenderDesiredScreen } from "@components/render-desired-screen";
 import { useAppSelector } from "@hooks";
-import { geopositionSelector } from "@store/selectors";
+import { geopositionSelector, geopositionStateSelector } from "@store/selectors";
 import React, { useCallback, useState } from "react";
 import { createPortal } from "react-dom";
 import { shallowEqual } from "react-redux";
@@ -8,7 +9,8 @@ import { shallowEqual } from "react-redux";
 import { City, Country, Wrapper } from "./styled";
 
 export const CountryAndCity = () => {
-  const { isLoading, hasError, city, country } = useAppSelector(geopositionSelector, shallowEqual);
+  const { city, country } = useAppSelector(geopositionSelector, shallowEqual);
+  const state = useAppSelector(geopositionStateSelector);
   const [popupShow, setPopupShow] = useState(false);
   const handleOpenPopup = () => {
     setPopupShow(true);
@@ -18,20 +20,14 @@ export const CountryAndCity = () => {
     setPopupShow(false);
   }, []);
 
-  if (hasError) {
-    return <div>Something went wrong...</div>;
-  }
-
   return (
     <>
       <Wrapper onClick={handleOpenPopup}>
-        {isLoading ? (
-          <div>Spinner...</div>
-        ) : (
+        <RenderDesiredScreen state={state}>
           <City>
             {city}, <Country>{country}</Country>
           </City>
-        )}
+        </RenderDesiredScreen>
       </Wrapper>
       {popupShow && createPortal(<CityPicker handleClose={handleClosePopup} />, document.body)}
     </>

@@ -1,7 +1,7 @@
 import { State } from "@types";
 import React from "react";
 
-import { NotFound } from "./styled";
+import { Text } from "./styled";
 
 type RenderDesiredScreenProps = {
   state: State;
@@ -11,20 +11,20 @@ type RenderDesiredScreenProps = {
 export const RenderDesiredScreen = ({ state, children }: RenderDesiredScreenProps) => {
   switch (state) {
     case State.loading: {
-      return <div>Spinner</div>;
+      return <Text>Loading...</Text>;
     }
     case State.error: {
-      return <div>Something went wrong</div>;
+      return <Text>Something went wrong</Text>;
     }
     case State.notFound: {
-      return <NotFound>Not found info</NotFound>;
+      return <Text>Not found info</Text>;
     }
     case State.normal: {
       return <>{children}</>;
     }
 
     default: {
-      return <div>State is not found</div>;
+      return <Text>State is not found</Text>;
     }
   }
 };
