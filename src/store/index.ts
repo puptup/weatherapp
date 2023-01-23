@@ -9,7 +9,7 @@ import { rootSaga } from "./sagas";
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["dailyWeather", "hourlyWeather", "calendar", "settings", "matchedCities"],
+  blacklist: ["weather", "calendar", "settings", "matchedCities", "geoposition"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

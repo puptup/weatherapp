@@ -10,6 +10,10 @@ import { call, put, select } from "redux-saga/effects";
 
 export function* dailyWeatherWorker(): SagaIterator {
   const city = yield select(citySelector);
+  if (!city) {
+    yield put(dailyWeatherStateChange(State.notFound));
+    return;
+  }
   yield put(dailyWeatherStateChange(State.loading));
   try {
     const response: DailyWeatherResponse = yield call(getDailyWeather, city);

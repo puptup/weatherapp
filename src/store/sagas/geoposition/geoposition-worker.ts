@@ -7,6 +7,11 @@ import { call, put } from "redux-saga/effects";
 
 export function* geopositionWorker(): SagaIterator {
   yield put(geopositionStateChange(State.loading));
+  const access = global.confirm("Do you give access to get your geolocation?");
+  if (!access) {
+    yield put(geopositionStateChange(State.notFound));
+    return;
+  }
   try {
     const response = yield call(getGeolocation);
     const { city, country_name } = response;

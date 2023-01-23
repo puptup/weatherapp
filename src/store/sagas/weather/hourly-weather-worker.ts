@@ -32,6 +32,10 @@ export function* setDaySaga({ payload }: ReturnType<typeof setDayAction>): SagaI
 
 export function* hourlyWeatherWorker(): SagaIterator {
   const city = yield select(citySelector);
+  if (!city) {
+    yield put(hourlyWeatherStateChange(State.notFound));
+    return;
+  }
   yield put(hourlyWeatherStateChange(State.loading));
   try {
     const response = yield call(getHourlyWeather, city);

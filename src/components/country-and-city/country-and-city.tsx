@@ -9,7 +9,7 @@ import { shallowEqual } from "react-redux";
 import { City, Country, Wrapper } from "./styled";
 
 export const CountryAndCity = () => {
-  const { city, country } = useAppSelector(geopositionSelector, shallowEqual);
+  const { city, country } = useAppSelector(geopositionSelector);
   const state = useAppSelector(geopositionStateSelector);
   const [popupShow, setPopupShow] = useState(false);
   const handleOpenPopup = () => {

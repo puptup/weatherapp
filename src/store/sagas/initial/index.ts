@@ -1,6 +1,7 @@
 import { CITY_CHANGED, INITIAL_APP } from "@store/actions";
 import { changeCity } from "@store/actions-creators";
-import { setGeoposition } from "@store/reducers/geoposition-slice";
+import { geopositionStateChange, setGeoposition } from "@store/reducers/geoposition-slice";
+import { State } from "@types";
 import { call, fork, put, take, takeEvery } from "redux-saga/effects";
 
 import { CalendarLoadEvents } from "../calendar/watcher";
@@ -11,6 +12,7 @@ import { hourlyWeatherWorker } from "../weather/hourly-weather-worker";
 export function* reinitialWorker({ payload }: ReturnType<typeof changeCity>) {
   const { name, country } = payload;
   yield put(setGeoposition({ city: name, country }));
+  yield put(geopositionStateChange(State.normal));
   yield fork(dailyWeatherWorker);
   yield fork(hourlyWeatherWorker);
 }
