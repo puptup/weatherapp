@@ -11,13 +11,13 @@ type RenderDesiredScreenProps = {
 export const RenderDesiredScreen = ({ state, children }: RenderDesiredScreenProps) => {
   switch (state) {
     case State.loading: {
-      return <Text>Loading...</Text>;
+      return <Text data-testid="loading-state">Loading...</Text>;
     }
     case State.error: {
-      return <Text>Something went wrong</Text>;
+      return <Text data-testid="error-state">Something went wrong</Text>;
     }
     case State.notFound: {
-      return <Text>Not found info</Text>;
+      return <Text data-testid="notfound-state">Not found info</Text>;
     }
     case State.normal: {
       return <>{children}</>;

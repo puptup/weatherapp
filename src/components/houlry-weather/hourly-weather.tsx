@@ -16,7 +16,6 @@ export const HourlyWeather = () => {
   const state = useAppSelector(hourlyWeatherStateSelector);
   const weather = useAppSelector(hourlyWeatherCurrentSelector);
   const currentDay = useAppSelector(currentDaySelector);
-
   const WeekDay = getWeekdayOrToday(currentDay);
 
   return (

@@ -40,7 +40,7 @@ export const CityPicker = ({ handleClose }: CityPickerProps) => {
   };
 
   return (
-    <PopUp onClick={handleClose}>
+    <PopUp data-testid="popup" onClick={handleClose}>
       <InputBlock onClick={handleClick}>
         <Title>City picker</Title>
         <Input type="text" onChange={handleChange} value={input} />

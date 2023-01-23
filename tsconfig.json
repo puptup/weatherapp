@@ -20,6 +20,6 @@
       "@*": ["*"]
     }
   },
-  "include": ["./src/**/*", "./index.d.ts"],
+  "include": ["./src/**/*", "./index.d.ts", "src/__tests__/components/country-and-city.test.tsx"],
   "exclude": ["node_modules"],
 }

@@ -35,7 +35,7 @@ export const DailyWeatherItem = ({ item, currentDay }: DailyWeatherItemProps) =>
   };
 
   return (
-    <WeatherItem active={currentDay} onClick={handleDay}>
+    <WeatherItem active={currentDay} onClick={handleDay} data-testid="daily-weather-item">
       <DateWrapper>{getWeekdayOrToday(new Date(date), true)}</DateWrapper>
       <Image src={image} alt="weather icon" />
       <TempWrapper>

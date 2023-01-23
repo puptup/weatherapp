@@ -1,7 +1,7 @@
-import { apiCalendar, fetchDayEvents } from "@services/api/calendar";
+import { fetchDayEvents } from "@services/api/calendar";
 import { RootState } from "@store";
 import { LOAD_EVENTS_FROM_CALENDAR } from "@store/actions";
-import { setEvents } from "@store/reducers/calendar-slice";
+import { setEvents, setLoggedOut } from "@store/reducers/calendar-slice";
 import { CalendarAPIResponse, CalendarEvent } from "@types";
 import { SagaIterator } from "redux-saga";
 import { call, put, select, takeEvery } from "redux-saga/effects";
@@ -26,7 +26,7 @@ export function* CalendarLoadEvents(): SagaIterator {
 
       yield put(setEvents(events));
     } catch (e) {
-      apiCalendar.handleAuthClick();
+      yield put(setLoggedOut());
     }
   }
 }

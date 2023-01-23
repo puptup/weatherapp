@@ -17,9 +17,9 @@ export const TimeAndDate = () => {
   }, []);
 
   return (
-    <TimeDateWrapper>
-      <Time>{date.toLocaleTimeString("en-GB", hourAndMinutesOptions)}</Time>
-      <StyledDate>{date.toLocaleDateString("en-GB", wholeDate)}</StyledDate>
+    <TimeDateWrapper data-testid="time-date">
+      <Time data-testid="time">{date.toLocaleTimeString("en-GB", hourAndMinutesOptions)}</Time>
+      <StyledDate data-testid="date">{date.toLocaleDateString("en-GB", wholeDate)}</StyledDate>
     </TimeDateWrapper>
   );
 };

@@ -21,6 +21,7 @@ export function* setCurrentHourlyWeather(): SagaIterator {
   const weatherOnCurrentDay = weather.filter(
     (item) => new Date(item.date).getDay() === new Date(day).getDay()
   );
+
   yield put(setHourlyWeatherOnCurrentDay(weatherOnCurrentDay));
 }
 

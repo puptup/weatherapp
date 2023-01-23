@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`hourly-weather-item should correspond to snapshot 1`] = `
+<div
+  class="sc-gswNZR bsuyEe"
+  data-testid="hourly-weather-item"
+>
+  <div>
+    17
+  </div>
+  <img
+    alt="hourly weahter"
+    class="sc-bcXHqe bzmlG"
+  />
+  <div>
+    0
+  </div>
+</div>
+`;

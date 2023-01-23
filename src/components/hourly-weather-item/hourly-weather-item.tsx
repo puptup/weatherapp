@@ -20,7 +20,7 @@ export const HourlyWeatherItem = ({ item }: HourlyWeatherItemProps) => {
   }, []);
 
   return (
-    <Item>
+    <Item data-testid="hourly-weather-item">
       <div>{new Date(date).toLocaleTimeString("en-GB", hoursOptions)}</div>
       <Image src={image} alt="hourly weahter" />
       <div>{Math.round(temperature)}</div>
