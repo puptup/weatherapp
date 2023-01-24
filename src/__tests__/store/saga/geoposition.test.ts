@@ -1,5 +1,6 @@
 import * as api from "@services/api/get-geolocation";
 import { geopositionStateChange, setGeoposition } from "@store/reducers/geoposition-slice";
+import { setAccessToGeoposition } from "@store/reducers/settings-slice";
 import { geopositionWorker } from "@store/sagas/geoposition/geoposition-worker";
 import { State } from "@types";
 import { AnyAction } from "redux";
@@ -18,19 +19,23 @@ describe("geopositionWorker", () => {
     await runSaga(
       {
         dispatch: (action: AnyAction) => dispatched.push(action),
+        getState: () => ({
+          settings: {
+            accessToGeoposition: false,
+          },
+        }),
       },
       geopositionWorker
     ).toPromise();
 
     expect(dispatched).toEqual([
       geopositionStateChange(State.loading),
+      setAccessToGeoposition(false),
       geopositionStateChange(State.notFound),
     ]);
   });
 
   it("should works correctly with confirm", async () => {
-    jest.spyOn(global, "confirm").mockReturnValue(true);
-
     const mockResp = { city: "test", country_name: "test" };
 
     const fetch = jest
@@ -42,6 +47,11 @@ describe("geopositionWorker", () => {
     await runSaga(
       {
         dispatch: (action: AnyAction) => dispatched.push(action),
+        getState: () => ({
+          settings: {
+            accessToGeoposition: true,
+          },
+        }),
       },
       geopositionWorker
     ).toPromise();

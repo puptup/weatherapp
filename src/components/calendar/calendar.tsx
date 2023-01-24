@@ -53,7 +53,7 @@ export const Calendar = () => {
         ))}
       </CalendarWrapper>
       <ButtonsWrapper>
-        <Button onClick={!isLogged ? handleSignIn : handleSignOut}>
+        <Button onClick={!isLogged ? handleSignIn : handleSignOut} data-testid="google-button">
           <LogoWrapper>
             <GoogleLogo src={Logo} alt="google logo" />
           </LogoWrapper>

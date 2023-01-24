@@ -20,7 +20,9 @@ export const HourlyWeather = () => {
 
   return (
     <HourlyWeatherWrapper>
-      <TitleWrapper>{WeekDay}&apos; hourly forecast</TitleWrapper>
+      <TitleWrapper data-testid="hourly-weather-title">
+        {WeekDay}&apos;s hourly forecast
+      </TitleWrapper>
       <Line />
       <ItemsWrapper>
         <RenderDesiredScreen state={state}>

@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@hooks";
 import { setDayAction } from "@store/actions-creators";
-import { setTheme } from "@store/reducers/theme-slice";
+import { setTheme } from "@store/reducers/settings-slice";
 import { DailyWeather } from "@types";
 import { getWeekdayOrToday } from "@utils/date";
 import { loadIcon } from "@utils/loadImage";

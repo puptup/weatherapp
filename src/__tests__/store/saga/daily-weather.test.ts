@@ -1,6 +1,6 @@
 import * as api from "@services/api/meteo-source";
 import { dailyWeatherMocked, mockedDailyWeatherResponse } from "@services/api/mocked-data";
-import { setTheme } from "@store/reducers/theme-slice";
+import { setTheme } from "@store/reducers/settings-slice";
 import { dailyWeatherStateChange, setDailyWeather } from "@store/reducers/weather-slice";
 import { dailyWeatherWorker } from "@store/sagas/weather/daily-weather-worker";
 import { State } from "@types";

@@ -22,3 +22,4 @@ export const matchedCitiesStateSelector = (state: RootState) =>
   state.matchedCities.matchedCitiesState;
 
 export const themeSelector = (state: RootState) => state.settings.theme;
+export const accessToGeopositionSelector = (state: RootState) => state.settings.accessToGeoposition;
