@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CalendarEvent, State } from "@types";
+import { CalendarEvent } from "@types";
 
 type CalendarStateType = {
   isLogged: boolean;
