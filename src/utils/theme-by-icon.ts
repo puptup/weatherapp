@@ -5,9 +5,9 @@ const snow = [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 34, 35, 36];
 
 export const getThemeByIcon = (icon: string) => {
   const numberIcon = Number(icon);
-  if (clearSky.includes(numberIcon)) return "clear-sky";
+  if (clearSky.includes(numberIcon)) return "clearSky";
   if (cloudy.includes(numberIcon)) return "cloudy";
   if (rain.includes(numberIcon)) return "rain";
   if (snow.includes(numberIcon)) return "snow";
-  return "clear-sky";
+  return "clearSky";
 };

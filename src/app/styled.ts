@@ -1,15 +1,15 @@
+import { backgrounds, BackgroundThemeKeys } from "@assets/weather-background";
 import { device } from "@constants/devices";
-import { loadBackground } from "@utils/loadImage";
 import styled from "styled-components";
 
 type MainWrapperProps = {
-  background: string;
+  background: BackgroundThemeKeys;
 };
 
 export const MainWrapper = styled.div<MainWrapperProps>`
+  background-image: url(${({ background }) => backgrounds[background]});
   max-width: 1024px;
   width: 100vw;
-  background-image: url(${({ background }) => loadBackground(background)});
   background-size: 100%;
   padding: ${({ theme }) => theme.spacing.betweenBlocks};
   border-radius: ${({ theme }) => theme.spacing.borderRadiusBlock};

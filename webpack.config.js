@@ -33,6 +33,7 @@ module.exports = {
       '@constants': path.resolve(__dirname, './src/constants'),
       '@app': path.resolve(__dirname, './src/app'),
       '@services': path.resolve(__dirname, './src/services'),
+      '@assets': path.resolve(__dirname, './src/assets'),
       '@utils': path.resolve(__dirname, './src/utils'),
       '@types': path.resolve(__dirname, './src/types'),
       '@theme': path.resolve(__dirname, './src/theme'),

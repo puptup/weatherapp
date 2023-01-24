@@ -1,14 +1,13 @@
+import { BackgroundThemeKeys } from "@assets/weather-background";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type Theme = "clear-sky" | "cloudy" | "rain" | "snow";
-
 type ThemeStateType = {
-  theme: Theme;
+  theme: BackgroundThemeKeys;
   accessToGeoposition: boolean;
 };
 
 const initialState: ThemeStateType = {
-  theme: "clear-sky",
+  theme: "clearSky",
   accessToGeoposition: false,
 };
 
@@ -16,7 +15,7 @@ const settingsSlice = createSlice({
   name: "settings",
   initialState,
   reducers: {
-    setTheme: (state, { payload }: PayloadAction<Theme>) => {
+    setTheme: (state, { payload }: PayloadAction<BackgroundThemeKeys>) => {
       state.theme = payload;
     },
     setAccessToGeoposition: (state, { payload }: PayloadAction<boolean>) => {

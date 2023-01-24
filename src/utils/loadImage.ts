@@ -32,6 +32,3 @@ export const loadIcon = async (iconID: string, openWeather: boolean = false) => 
   }
   return import(`../assets/weather-icons/${iconID}.png`);
 };
-
-export const loadBackground = (background: string) =>
-  `../src/assets/weather-background/${background}.png`;
