@@ -1,0 +1,6 @@
+export const FETCH_GEOPOSITION = "FETCH_GEOPOSITION";
+export const INITIAL_APP = "INITIAL_APP";
+export const SET_DAY = "SET_DAY";
+export const LOAD_EVENTS_FROM_CALENDAR = "LOAD_EVENTS_FROM_CALENDAR";
+export const MATCH_CITY = "MATCH_CITY";
+export const CITY_CHANGED = "CITY_CHANGED";
